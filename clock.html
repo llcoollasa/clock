@@ -1,0 +1,78 @@
+<html>
+<head>
+<style>
+.clock{
+border: 1px black solid;
+display:block;
+width: 400px;
+height: 400px;
+margin: 0 auto;
+-moz-border-radius: 200px;
+-webkit-border-radius: 200px;
+border-radius: 200px;
+
+}
+ 
+ .minute-container, .hour-container, .seconds-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hour-hand {
+    background: #000;
+    height: 160px; 
+    position: absolute; 
+    transform-origin: 50% 100%;
+    width: 5px;
+    left: 50%;
+    top: 9%;
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+
+
+.minute-hand {
+    background: red;
+    height: 140px;
+    position: absolute;
+    transform-origin: 50% 100%;
+    width: 5px;
+    left: 50%;
+    top: 12%;
+    -ms-transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+    transform: rotate(60deg);
+}
+.middle{
+    background: black;
+    width: 15px;
+    height: 16px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    left: 50%;
+    position: absolute;
+    top: 34%;
+}
+}
+</style>
+</head>
+<body>
+
+<div class='clock'>
+	<div class='hour-container'>
+		<div class='hour-hand'></div>
+	</div>
+	<div class='minute-container'>
+		<div class='minute-hand'></div>
+	</div>
+	<div class='middle'>
+	</div>
+</div>
+
+</body>
+<html>
