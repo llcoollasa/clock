@@ -1,0 +1,18 @@
+####################
+# clock.html
+####################
+
+1.) This will contain the basic clock as per the requirement (1.)
+You can enter custom time in text field and press set time, to see how clock changes. then the normal clock will stop and shows the current time.
+Again click resume to return to normal clock.
+
+
+####################
+# clock_v2.html
+####################
+
+1.1) This will contain the hour hand movement in proportion to minute hand.
+you can monitor the angle values under the clock.
+
+1.2) compute the angle between a minute hand and a second hand was done by deducting the minute degree from second degree.
+This will show as "Angle between a minute hand and a second hand" section

@@ -34,11 +34,21 @@
     <div></div>
 </div>
 
+
+<div>
+    <span>Angle between a minute hand and a second hand : </span>
+    <span id="sec-min"></span>
+</div>
+
+
 <script type="text/javascript">
 
     $(document).ready(function () {
 
         var runClock = true;
+        var mm;
+        var ss;
+
 
         function hourHand(hour) {
             hh = hour;
@@ -49,31 +59,39 @@
             if (hh > 24 || hh < 0) {
                 alert('Invalid Hour input');
             }
-
             setClockHand('.hour-hand', hour * 30);
             $('#settime').val('Set Time');
         }
 
-        function minuteHand(minute) {
+        function minuteHand(minute,hour) {
             if (minute > 59 || minute < 0) {
                 alert('Invalid Minute input');
             }
             setClockHand('.minute-hand', minute * 6);
+            setClockHand('.hour-hand', hour * 30 + ((0.5 * minute)));
+
         }
 
         function secondHand(sec) {
+            console.log(sec);
             if (sec > 59 || sec < 0) {
                 alert('Invalid Second input');
             }
+
             setClockHand('.second-hand', sec * 6);
+
+
         }
 
         function setClockHand(elm, val) {
+
             switch (elm){
                 case '.second-hand':
+                    ss=val;
                     $('#secLog').html("Second: "+ val + " Degree");
                     break;
                 case '.minute-hand':
+                    mm = val;
                     $('#minLog').html("Minute: "+ val + " Degree");
                     break;
                 case '.hour-hand':
@@ -82,17 +100,24 @@
             }
 
             sRot = "rotate(" + val + "deg)";
-            $(elm).css({"-moz-transform": sRot, "-webkit-transform": sRot})
+            $(elm).css({"-moz-transform": sRot, "-webkit-transform": sRot});
+
+            secMin = ss-mm;
+            if(secMin <0){
+                secMin = secMin * -1;
+            }
+
+            $('#sec-min').html(secMin);
         }
 
 
         function showTime() {
 
             if (runClock) {
-                var c = new Date();
-                hourHand(c.getHours());
-                minuteHand(c.getMinutes());
-                secondHand(c.getSeconds());
+//                var c = new Date();
+//                hourHand(c.getHours());
+//                minuteHand(c.getMinutes(),c.getHours());
+//                secondHand(c.getSeconds());
             }
         }
 
@@ -103,7 +128,7 @@
             ss = $('#sec').val();
 
             hourHand(hh);
-            minuteHand(mm);
+            minuteHand(mm,hh);
             secondHand(ss);
 
         }
