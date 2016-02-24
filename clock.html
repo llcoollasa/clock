@@ -1,7 +1,12 @@
 <html>
 <head>
+<head>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+</head>
+
 <style>
 .clock{
+position: relative;
 border: 1px black solid;
 display:block;
 width: 400px;
@@ -23,12 +28,12 @@ border-radius: 200px;
 
 .hour-hand {
     background: #000;
-    height: 160px; 
-    position: absolute; 
+    height: 100px;
+    position: absolute;
     transform-origin: 50% 100%;
-    width: 5px;
+    width: 10px;
     left: 50%;
-    top: 9%;
+    top: 22%;
     -ms-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
@@ -36,10 +41,10 @@ border-radius: 200px;
 
 
 .minute-hand {
-    background: red;
+    background: #000;
     height: 140px;
     position: absolute;
-    transform-origin: 50% 100%;
+    transform-origin: 10% 100%;
     width: 5px;
     left: 50%;
     top: 12%;
@@ -47,32 +52,134 @@ border-radius: 200px;
     -webkit-transform: rotate(60deg);
     transform: rotate(60deg);
 }
-.middle{
-    background: black;
-    width: 15px;
-    height: 16px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-    left: 50%;
+
+.second-hand {
+    background: red;
+    height: 140px;
     position: absolute;
-    top: 34%;
+    transform-origin: 10% 100%;
+    width: 5px;
+    left: 50%;
+    top: 12%;
+    -ms-transform: rotate(60deg);
+    -webkit-transform: rotate(60deg);
+    transform: rotate(60deg);
 }
+
+.set-time-area{
+width: 470px;
+margin: 10px auto; 
+}
+
 }
 </style>
 </head>
 <body>
 
 <div class='clock'>
-	<div class='hour-container'>
-		<div class='hour-hand'></div>
-	</div>
-	<div class='minute-container'>
-		<div class='minute-hand'></div>
-	</div>
-	<div class='middle'>
-	</div>
+	<div class='hour-container'><div class='hour-hand'></div></div>
+	<div class='minute-container'><div class='minute-hand'></div></div> 
+	<div class='second-container'><div class='second-hand'></div></div> 
 </div>
 
+<div class="set-time-area">
+Hour(s)<input type='text' id='hour' size =5 />
+Minute(s)<input type='text' id='min' size =5 />
+Second(s)<input type='text' id='sec' size =5 />
+<input type='button' value="Set Time" id='settime' />
+</div>
+
+<div class='log'>
+<div id='hourLog'></div>
+<div id='minLog'></div>
+<div id='secLog'></div>
+<div></div>
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+var runClock = true;
+
+function hourHand(hour){
+hh = hour;
+if(hh > 12){
+ hh = hh-12;
+}
+
+if(hh>24 || hh < 0){
+alert('Invalid Hour input');
+}
+
+setClockHand('.hour-hand',hour*30);
+$('#settime').val('Set Time');
+}
+
+function minuteHand(minute){
+if(minute>59 || hh < 0){
+alert('Invalid Minute input');
+}
+ setClockHand('.minute-hand',minute*6);
+}
+
+function secondHand(sec){    
+if(minute>59 || hh < 0){
+alert('Invalid Second input');
+}
+ setClockHand('.second-hand',sec*6);
+}
+
+function setClockHand(elm,val){ 
+ sRot = "rotate(" + val + "deg)";
+ $(elm).css({"-moz-transform" : sRot, "-webkit-transform" : sRot})
+}
+
+
+function showTime(){ 
+
+if(runClock){
+ var c = new Date();
+hourHand(c.getHours());
+minuteHand(c.getMinutes());
+secondHand(c.getSeconds());
+}
+}
+
+function passTicks(){
+
+hh = $('#hour').val();
+mm = $('#min').val();
+ss = $('#sec').val();
+
+hourHand(hh);
+minuteHand(mm);
+secondHand(ss);
+
+}
+
+setInterval(showTime,1000);
+
+$('#settime').click(function(){
+if(runClock){
+runClock = false;
+passTicks();
+$('#settime').val('Resume');
+}else{
+runClock = true;
+$('#settime').val('Set Time');
+}
+});
+});
+
+
+  
+    
+    
+
+ 
+
+</script>
 </body>
 <html>
+
